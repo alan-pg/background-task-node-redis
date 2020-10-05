@@ -1,5 +1,6 @@
 import pwGenerator from 'password-generator';
 
+import Queue from '../lib/Queue';
 
 export default {
     async store(req, res){
@@ -9,7 +10,8 @@ export default {
             email,
             password: pwGenerator(15, false)
         };
-        
+
+        await Queue.add('RegistrationMail', { user })       
         
 
         console.log('resposta: ', req.body)
